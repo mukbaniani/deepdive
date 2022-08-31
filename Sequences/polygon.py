@@ -4,38 +4,76 @@ class Polygon:
     def __init__(self, edges, circum_radius):
         self._edges = edges
         self._circum_radius = circum_radius
+        self._interior_angle = None
+        self._edge_length = None
+        self._apothem = None
+        self._area = None
+        self._perimeter = None
+
 
     @property
     def edges(self):
         return self._edges
 
+    def _create_cache(self, value):
+        self._interior_angle = None
+        self._edge_length = None
+        self._apothem = None
+        self._area = None
+        self._perimeter = None
+
+    @edges.setter
+    def edges(self, value):
+        self._create_cache(value)
+        self._edges = value
+
     @property
     def circum_radius(self):
         return self._circum_radius
+
+    @circum_radius.setter
+    def circum_radius(self, value):
+        self._create_cache(value)
+        self._circum_radius = value
 
     @property
     def vertices(self):
         return self._edges
 
+    @vertices.setter
+    def vertices(self, value):
+        self._create_cache(value)
+        self._edges = value
+
     @property
     def interior_angle(self):
-        return (self._edges - 2) * 180 / self._edges
+        if self._interior_angle is None:
+            self._interior_angle = (self._edges - 2) * 180 / self._edges
+        return self._interior_angle
 
     @property
     def edge_length(self):
-        return 2 * self._circum_radius * math.sin(math.pi / self._edges)
+        if self._edge_length is None:
+            self._edge_length = 2 * self._circum_radius * math.sin(math.pi / self._edges)
+        return self._edge_length
 
     @property
     def apothem(self):
-        return self._circum_radius * math.cos(math.pi / self._edges)
+        if self._apothem is None:
+            self._apothem = self._circum_radius * math.cos(math.pi / self._edges)
+        return self._apothem
 
     @property
     def area(self):
-        return 0.5 * self._edges * self.edge_length * self.apothem
+        if self._area is None:
+            self._area = 0.5 * self._edges * self.edge_length * self.apothem
+        return self._area
 
     @property
     def perimeter(self):
-        return self._edges * self.edge_length
+        if self._perimeter is None:
+            self._perimeter = self._edges * self.edge_length
+        return self._perimeter
 
     def __eq__(self, other):
         if not isinstance(other, self.__class__):

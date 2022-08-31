@@ -14,9 +14,9 @@ class TestPolygon(unittest.TestCase):
         self.assertEqual(p.circum_radius, R)
         self.assertEqual(p.interior_angle, 60)
 
+        p.edges = 4
+        p.circum_radius = 1
         n = 4
-        R = 1
-        p = Polygon(n, R)
         assert (math.isclose(p.area, 2)), (f'actual: {p.area},'' expected: 2.0')
         assert (math.isclose(p.edge_length, math.sqrt(2))), (f'actual: {p.edge_length}, 'f' expected: {math.sqrt(2)}')
         assert (math.isclose(p.perimeter, n * math.sqrt(2))), (f'actual: {p.perimeter},' f' expected: {4 * math.sqrt(2)}')
