@@ -92,12 +92,3 @@ class Account:
 
     def generate_transaction_id(self):
         self._transaction_id = next(self._transaction_id)
-
-
-a = Account(account_number=1, first_name='zura', last_name='gela', timezone_name='TBC', offset_hours=4,
-            offset_minutes=1)
-# print(a.balance)
-a.deposit(150)
-a.monthly_interest_rate()
-print(a.transaction_code)
-print(a.conformation_number)
