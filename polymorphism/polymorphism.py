@@ -29,7 +29,7 @@ class Mod:
             return other % self.modules
         elif isinstance(other, Mod) and self.modules == other.modules:
             return other.value
-        raise TypeError('other must be int or Mod')
+        raise NotImplemented
 
     def _operator(self, other, op, in_place=True):
         get_value = self._get_type(other)
@@ -41,19 +41,12 @@ class Mod:
             return Mod(value=new_value, modules=self._modules)
 
     def __eq__(self, other):
-        if isinstance(other, int):
-            return self.value == other % self.modules
-        elif isinstance(other, Mod) and self.modules == other.modules:
-            return self.value == other.value
-        else:
-            return NotImplemented
+        value = self._get_type(other)
+        return self.value == value
 
     def __lt__(self, other):
-        if isinstance(other, int):
-            return self.value < (other % self.modules)
-        elif isinstance(other, Mod) and self.modules == other.modules:
-            return self.value < other.value
-        return NotImplemented
+        value = self._get_type(other)
+        return self.value < value
 
     def __int__(self):
         return self.value
