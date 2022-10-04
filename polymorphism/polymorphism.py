@@ -96,5 +96,3 @@ class Mod:
 
     def __repr__(self):
         return f'Mod(value={self.value} modules={self.modules})'
-
-print(Mod(3, 12) + Mod(3, 5))
